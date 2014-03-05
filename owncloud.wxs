@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<?define ProductVersion = "0.0.1"?> <!-- For Testing Purposes -->
+<?define ExeSourceFile = "ownCloud-1.5.2.2445-setup.exe"?> 
+<?define ProductUpgradeCode = "EB15081D-1892-4DB5-872C-9424BFFFF22D"?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+	<Product Id='*' 
+		UpgradeCode="$(var.ProductUpgradeCode)"
+		Name='ownCloud-1.5.2.2445-setup' 
+		Language='1033' 
+		Version='$(var.ProductVersion)' 
+		Manufacturer='Penn Manor ownCloud'>
+		<Package Description='pak' InstallerVersion='200' Compressed='yes' />
+		<Media Id='1' Cabinet='setup.cab' EmbedCab='yes' />
+		<Directory Id='TARGETDIR' Name='SourceDir'>
+			<Directory Id="TempFolder">
+				<Directory Id="INSTALLLOCATION" Name="~_tmpdir">
+					<Component Id='MyComponent' DiskId='1' Guid=''>
+						<File Id="File0" Name="ownCloud-1.5.2.2445-setup.exe" Source="$(var.ExeSourceFile)" />
+						<!-- SYNC EXCLUDE? <File Id="File1" Name="file1.txt" Source="file1.txt" /> -->
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+		<Feature Id='InstallFeature' Title='Install Feature' Level='1'>
+			<ComponentRef Id='MyComponent' />
+		</Feature>
+		<!-- Run Action -->
+		<CustomAction Id="RunWrapExe"
+			Return="ignore"
+			Execute="deferred"
+			FileKey="File0"
+			ExeCommand="ownCloud-1.5.2.2445-setup.exe /S"
+			HideTarget="no"
+			Impersonate="no" />
+		<InstallExecuteSequence>
+			<Custom Action="RunWrapExe" After="InstallFiles">NOT REMOVE~="ALL"</Custom>
+		</InstallExecuteSequence>
+	</Product>
+</Wix>
