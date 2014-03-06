@@ -10,11 +10,11 @@ This may reduce or negate the need for 'capture' apps, such as AppDeploy Repacka
 
 Using from source
 ---------------
-# Prerequisites
+### Prerequisites
 - .Net environment (Native Windows, Mono, etc)
 - WiX Toolset
 
-# Creating package
+### Creating package
 After cloning the repository, copy the requested .exe installer into the 
 directory and edit the .wxs script for the .exe name.
 
