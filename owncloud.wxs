@@ -1,12 +1,12 @@
 <?xml version='1.0'?>
 <?define PrevProductVersion = "0.0.1"?> <!-- For Testing Purposes -->
 <?define ProductVersion = "0.0.2"?> <!-- For Testing Purposes -->
-<?define ExeSourceFile = "ownCloud-1.5.2.2445-setup.exe"?>
+<?define ExeSourceFile = "ownCloud-1.5.3.2523-setup.exe"?>
 <?define ProductUpgradeCode = "EB15081D-1892-4DB5-872C-9424BFFFF22D"?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
 	<Product Id='*'
 		UpgradeCode="$(var.ProductUpgradeCode)"
-		Name='ownCloud-1.5.2.2445-setup'
+		Name='ownCloud-1.5.3.2523-setup'
 		Language='1033'
 		Version='$(var.ProductVersion)'
 		Manufacturer='Penn Manor ownCloud'>
