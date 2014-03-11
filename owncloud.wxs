@@ -35,6 +35,7 @@
 				Language="1033"
 				Property="UPGRADEFOUND" />
 		</Upgrade>
+		<Property Id="ARPSYSTEMCOMPONENT" Value="1" />
 		<Feature Id='InstallFeature' Title='Install Feature' Level='1'>
 			<ComponentRef Id='MyComponent' />
 		</Feature>
