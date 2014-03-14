@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<?define PrevProductVersion = "1.5.2"?> <!-- Match iTunes Client version -->
+<?define ProductVersion = "1.5.3"?>
+<?define ExeSourceFile = "iTunes64Setup.exe"?>
+<?define ProductCode = "134B180A-5F95-45A7-9E0E-7FEAC958D703"?>
+<?define ProductUpgradeCode = "EB15081D-1892-4DB5-872C-9424BFFFF22D"?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+	<Product Id='*'
+		UpgradeCode="$(var.ProductUpgradeCode)"
+		Name='iTunes64Setup'
+		Language='1033'
+		Version='$(var.ProductVersion)'
+		Manufacturer='Penn Manor iTunes'>
+		<Package Id='$(var.ProductCode)'
+			Description='pak'
+			InstallerVersion='200'
+			Compressed='yes' />
+		<Media Id='1' Cabinet='setup.cab' EmbedCab='yes' />
+		<Directory Id='TARGETDIR' Name='SourceDir'>
+			<Directory Id="TempFolder">
+				<Directory Id="INSTALLLOCATION" Name="~_tmpdir">
+					<Component Id='MyComponent' DiskId='1' Guid='B3514243-DFB8-4BB1-8495-ED6153468361'>
+						<File Id="File0" Name="iTunes64Setup.exe" Source="$(var.ExeSourceFile)" />
+						<!-- SYNC EXCLUDE? <File Id="File1" Name="file1.txt" Source="file1.txt" /> -->
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+		<Upgrade Id="$(var.ProductUpgradeCode)">
+			<UpgradeVersion Minimum="$(var.ProductVersion)"
+				IncludeMinimum="no"
+				OnlyDetect="yes"
+				Language="1033"
+				Property="NEWPRODUCTFOUND" />
+			<UpgradeVersion Minimum="$(var.PrevProductVersion)"
+				IncludeMinimum="yes"
+				Maximum="$(var.ProductVersion)"
+				IncludeMaximum="no"
+				Language="1033"
+				Property="UPGRADEFOUND" />
+		</Upgrade>
+		<Property Id="ARPSYSTEMCOMPONENT" Value="1" />
+		<Feature Id='InstallFeature' Title='Install Feature' Level='1'>
+			<ComponentRef Id='MyComponent' />
+		</Feature>
+
+		<!-- Prevent downgrading -->
+		<CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
+
+		<InstallUISequence>
+			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+		</InstallUISequence>
+
+		<!-- Run Action -->
+		<CustomAction Id="RunWrapExe"
+			Return="ignore"
+			Execute="deferred"
+			FileKey="File0"
+			ExeCommand="iTunes64Setup.exe /S"
+			HideTarget="no"
+			Impersonate="no" />
+		<InstallExecuteSequence>
+			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+			<Custom Action="RunWrapExe" After="InstallFiles">NOT REMOVE~="ALL"</Custom>
+			<RemoveExistingProducts After="InstallFinalize" />
+		</InstallExecuteSequence>
+	</Product>
+</Wix>
