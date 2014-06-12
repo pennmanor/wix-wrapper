@@ -1,13 +1,13 @@
 <?xml version='1.0'?>
-<?define PrevProductVersion = "1.5.2"?> <!-- Match ownCloud Client version -->
-<?define ProductVersion = "1.5.3"?>
-<?define ExeSourceFile = "ownCloud-1.5.3.2523-setup.exe"?>
-<?define ProductCode = "134B180A-5F95-45A7-9E0E-7FEAC958D703"?>
-<?define ProductUpgradeCode = "EB15081D-1892-4DB5-872C-9424BFFFF22D"?>
+<?define PrevProductVersion = "1.5.3"?> <!-- Match ownCloud Client version -->
+<?define ProductVersion = "1.6.0"?>
+<?define ExeSourceFile = "ownCloud-1.6.0.3082-setup.exe"?>
+<?define ProductCode = "3B00768c-A692-4FEC-B50B-5332189011F1"?>
+<?define ProductUpgradeCode = "134B180A-5F95-45A7-9E0E-7FEAC958D703"?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
 	<Product Id='*'
 		UpgradeCode="$(var.ProductUpgradeCode)"
-		Name='ownCloud-1.5.3.2523-setup'
+		Name='ownCloud-1.6.0.3082-setup.exe'
 		Language='1033'
 		Version='$(var.ProductVersion)'
 		Manufacturer='Penn Manor ownCloud'>
@@ -20,7 +20,7 @@
 			<Directory Id="TempFolder">
 				<Directory Id="INSTALLLOCATION" Name="~_tmpdir">
 					<Component Id='MyComponent' DiskId='1' Guid='B3514243-DFB8-4BB1-8495-ED6153468361'>
-						<File Id="File0" Name="ownCloud-1.5.3.2523-setup.exe" Source="$(var.ExeSourceFile)" />
+						<File Id="File0" Name="ownCloud-1.6.0.3082-setup.exe" Source="$(var.ExeSourceFile)" />
 						<!-- SYNC EXCLUDE? <File Id="File1" Name="file1.txt" Source="file1.txt" /> -->
 					</Component>
 				</Directory>
@@ -56,7 +56,7 @@
 			Return="ignore"
 			Execute="deferred"
 			FileKey="File0"
-			ExeCommand="ownCloud-1.5.2.2445-setup.exe /S"
+			ExeCommand="ownCloud-1.6.0.3082-setup.exe /S"
 			HideTarget="no"
 			Impersonate="no" />
 		<InstallExecuteSequence>
