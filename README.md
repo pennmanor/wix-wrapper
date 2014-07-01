@@ -18,7 +18,18 @@ Using from source
 After cloning the repository, copy the requested .exe installer into the 
 directory and edit the .wxs script for the .exe name.
 
-Run the WiX tools- `candle *.wxs` then `light *.wixobj`, and the MSI will
+Currently, `owncloud.wxs` simply needs the indicated edits on lines 2-6,
+making the appropriate updates for .exe filename, GUID, et cetera.
+
+GUIDs for the new installer version may be created via [web tools](http://www.guidgen.com/).
+*N.B. all GUIDs must be be in majuscule case.*
+
+**Package creation may be done automatically:**
+After ensuring that the WiX tools are in the Windows Path, simply run the `make_installer.bat` file.
+The script will automatically clear any artifacts from previous builds and generate a new MSI package.
+
+**Package creation may also be done manually:**
+Run the WiX tools- first, `candle *.wxs` then `light *.wixobj`, and the MSI will
 be created.
 
 
