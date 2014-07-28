@@ -1,9 +1,9 @@
 <?xml version='1.0'?>
 <?define PrevProductVersion = "1.6.0"?> <!-- Match previous ownCloud Client version -->
 <?define ProductVersion = "1.6.1"?> <!-- Match ownCloud Client version -->
-<?define ExeSourceFile = "ownCloud-1.6.1.3267-setup.exe"?> <!-- Match new .exe -->
-<?define ProductCode = "BE86E16B-28DD-4764-9AD8-80DDC9C5EBD0"?> <!-- Regenerate for new upgrade -->
-<?define ProductUpgradeCode = "134B180A-5F95-45A7-9E0E-7FEAC958D703"?> <!-- When upgrading, move previous ProductCode here -->
+<?define ExeSourceFile = "ownCloud-1.6.2.3463-setup.exe"?> <!-- Match new .exe -->
+<?define ProductCode = "36E557AC-21B9-4134-A6A1-EAA00A7DBB0E"?> <!-- Regenerate for new upgrade -->
+<?define ProductUpgradeCode = "BE86E16B-28DD-4764-9AD8-80DDC9C5EBD0"?> <!-- When upgrading, move previous ProductCode here -->
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
 	<Product Id='*'
 		UpgradeCode="$(var.ProductUpgradeCode)"
@@ -12,7 +12,7 @@
 		Version='$(var.ProductVersion)'
 		Manufacturer='Penn Manor ownCloud'>
 		<Package Id='$(var.ProductCode)'
-			Description='pak'
+			Description='MSI Package Installer'
 			InstallerVersion='200'
 			Compressed='yes' />
 		<Media Id='1' Cabinet='setup.cab' EmbedCab='yes' />
