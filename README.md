@@ -35,10 +35,26 @@ first, `candle *.wxs` then `light *.wixobj`, and the MSI will be created.
 
 ### Full MSI Creation Steps:
 
-1. Copy the official or custom build owncloud.exe file into the project folder.
+1. Copy the official or custom built owncloud.exe file into the project folder.
 2. Edit `owncloud.wxs` lines 2-6 as necessary. Generally, only update version and filename.
 3. Run `make_installer.bat`, or run `candle *.wxs`, and `light *.wixobj`.
 4. Copy the newly created owncloud.msi to an appropriate install location (AD server, Network share, etc.)
+5. Install the owncloud.msi with any valid tool- Group Policy, Remote Admin commands, etc.
+
+
+### A note about GUIDs
+
+WiX and Windows use Globally Unique Identifiers as a way to identify software installs and other 'products' that are stored on a Windows system.
+Because of the length and diversity of GUIDs, the chance of a GUID collision is near-zero.
+For general purpose projects, such as this, any common GUID generator may be used.
+
+When generating an update for the WiX file, a single new GUID is needed on the indicated line.
+The GUID referring to the previous install must also be listed so that the installer can properly identify and remove the previous package.
+All GUIDs must be in majuscule (upper) case.
+
+Also of note is a hard-coded GUID in `owncloud.wxs` line 22.
+This hard-coded GUID can be used under the assumption that packages are deployed in such a method that the receiving computers have since been restarted and/or cleared the temporary file cache.
+
 
 ## Contributing
 ### Code
