@@ -5,63 +5,74 @@
 <?define ProductCode = "4FA0ABC1-704A-4248-8BC4-34247B1F6D37"?> <!-- Regenerate for new upgrade -->
 <?define ProductUpgradeCode = "2EEC2790-6B62-47E7-A187-B4BEFAA600A4"?> <!-- When upgrading, move previous ProductCode here -->
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
-	<Product Id='*'
-		UpgradeCode="$(var.ProductUpgradeCode)"
-		Name='ownCloud Sync Client'
-		Language='1033'
-		Version='$(var.ProductVersion)'
-		Manufacturer='Penn Manor ownCloud'>
-		<Package Id='$(var.ProductCode)'
-			Description='ownCloud Client $(var.ProductVersion)'
-			InstallerVersion='200'
-			Compressed='yes' />
-		<Media Id='1' Cabinet='setup.cab' EmbedCab='yes' />
-		<Directory Id='TARGETDIR' Name='SourceDir'>
-			<Directory Id="TempFolder">
-				<Directory Id="INSTALLLOCATION" Name="~_tmpdir">
-					<Component Id='MyComponent' DiskId='1' Guid='B3514243-DFB8-4BB1-8495-ED6153468361'>
-						<File Id="File0" Name="$(var.ExeSourceFile)" Source="$(var.ExeSourceFile)" />
-					</Component>
-				</Directory>
-			</Directory>
-		</Directory>
-		<Upgrade Id="$(var.ProductUpgradeCode)">
-			<UpgradeVersion Minimum="$(var.ProductVersion)"
-				IncludeMinimum="no"
-				OnlyDetect="yes"
-				Language="1033"
-				Property="NEWPRODUCTFOUND" />
-			<UpgradeVersion Minimum="$(var.PrevProductVersion)"
-				IncludeMinimum="yes"
-				Maximum="$(var.ProductVersion)"
-				IncludeMaximum="no"
-				Language="1033"
-				Property="UPGRADEFOUND" />
-		</Upgrade>
-		<Property Id="ARPSYSTEMCOMPONENT" Value="1" />
-		<Feature Id='InstallFeature' Title='Install Feature' Level='1'>
-			<ComponentRef Id='MyComponent' />
-		</Feature>
+        <Product Id='*'
+                UpgradeCode="$(var.ProductUpgradeCode)"
+                Name='ownCloud Sync Client'
+                Language='1033'
+                Version='$(var.ProductVersion)'
+                Manufacturer='Penn Manor ownCloud'>
+                <UIRef Id="WixUI_Minimal" />
+                <WixVariable Id="WixUILicenseRtf"
+                        Value="Licese.rtf" />
+                <Package Id='$(var.ProductCode)'
+                        Description='ownCloud Client $(var.ProductVersion)'
+                        InstallerVersion='200'
+                        Compressed='yes' />
+                <Media Id='1' Cabinet='setup.cab' EmbedCab='yes' />
+                <Directory Id='TARGETDIR' Name='SourceDir'>
+                        <Directory Id="TempFolder">
+                                <Directory Id="INSTALLLOCATION" Name="~_tmpdir">
+                                        <Component Id='MyComponent' DiskId='1' Guid='B3514243-DFB8-4BB1-8495-ED6153468361'>
+                                                <File Id="File0" Name="$(var.ExeSourceFile)" Source="$(var.ExeSourceFile)" />
+                                        </Component>
+                                </Directory>
+                        </Directory>
+                </Directory>
+                <Upgrade Id="$(var.ProductUpgradeCode)">
+                        <UpgradeVersion Minimum="$(var.ProductVersion)"
+                                IncludeMinimum="no"
+                                OnlyDetect="yes"
+                                Language="1033"
+                                Property="NEWPRODUCTFOUND" />
+                        <UpgradeVersion Minimum="$(var.PrevProductVersion)"
+                                IncludeMinimum="yes"
+                                Maximum="$(var.ProductVersion)"
+                                IncludeMaximum="no"
+                                Language="1033"
+                                Property="UPGRADEFOUND" />
+                </Upgrade>
+                <Property Id="ARPSYSTEMCOMPONENT" Value="1" />
+                <Feature Id='InstallFeature' Title='Install Feature' Level='1'>
+                        <ComponentRef Id='MyComponent' />
+                </Feature>
 
-		<!-- Prevent downgrading -->
-		<CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
+                <!-- Prevent downgrading -->
+                <CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
 
-		<InstallUISequence>
-			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-		</InstallUISequence>
+                <InstallUISequence>
+                        <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+                </InstallUISequence>
 
-		<!-- Run Action -->
-		<CustomAction Id="RunWrapExe"
-			Return="ignore"
-			Execute="deferred"
-			FileKey="File0"
-			ExeCommand="$(var.ExeSourceFile) /S"
-			HideTarget="no"
-			Impersonate="no" />
-		<InstallExecuteSequence>
-			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-			<Custom Action="RunWrapExe" After="InstallFiles">NOT REMOVE~="ALL"</Custom>
-			<RemoveExistingProducts After="InstallFinalize" />
-		</InstallExecuteSequence>
-	</Product>
+                <!-- Run Action -->
+                <CustomAction Id="RunWrapExe"
+                        Return="ignore"
+                        Execute="deferred"
+                        FileKey="File0"
+                        ExeCommand="$(var.ExeSourceFile) /S"
+                        HideTarget="no"
+                        Impersonate="no" />
+                <CustomAction Id="RegisterShell"
+                        Return="check"
+                        Execute="deferred"
+                        FileKey="File0"
+                        ExeCommand="regsvr32.exe /s ownCloud\shellext\OCContextMenu_x86.dll"
+                        HideTarget="no"
+                        Impersonate="no" />
+                <InstallExecuteSequence>
+                        <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+                        <Custom Action="RunWrapExe" After="InstallFiles">NOT REMOVE~="ALL"</Custom>
+                        <Custom Action="RegisterShell" After="RunWrapExe" />
+                        <RemoveExistingProducts After="InstallFinalize" />
+                </InstallExecuteSequence>
+        </Product>
 </Wix>
