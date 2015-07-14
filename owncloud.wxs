@@ -11,9 +11,6 @@
                 Language='1033'
                 Version='$(var.ProductVersion)'
                 Manufacturer='Penn Manor ownCloud'>
-                <UIRef Id="WixUI_Minimal" />
-                <WixVariable Id="WixUILicenseRtf"
-                        Value="Licese.rtf" />
                 <Package Id='$(var.ProductCode)'
                         Description='ownCloud Client $(var.ProductVersion)'
                         InstallerVersion='200'
@@ -61,17 +58,9 @@
                         ExeCommand="$(var.ExeSourceFile) /S"
                         HideTarget="no"
                         Impersonate="no" />
-                <CustomAction Id="RegisterShell"
-                        Return="check"
-                        Execute="deferred"
-                        FileKey="File0"
-                        ExeCommand="regsvr32.exe /s ownCloud\shellext\OCContextMenu_x86.dll"
-                        HideTarget="no"
-                        Impersonate="no" />
                 <InstallExecuteSequence>
                         <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
                         <Custom Action="RunWrapExe" After="InstallFiles">NOT REMOVE~="ALL"</Custom>
-                        <Custom Action="RegisterShell" After="RunWrapExe" />
                         <RemoveExistingProducts After="InstallFinalize" />
                 </InstallExecuteSequence>
         </Product>
