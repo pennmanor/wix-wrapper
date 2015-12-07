@@ -1,9 +1,9 @@
 <?xml version='1.0'?>
-<?define ProductVersion = "2.0.2"?> <!-- Match ownCloud Client version -->
-<?define PrevProductVersion = "2.0.1"?> <!-- Match previous ownCloud Client version -->
-<?define ExeSourceFile = "ownCloud-2.0.2.5569-setup.exe"?> <!-- Match new .exe -->
-<?define ProductCode = "87CA6CC7-4F67-4663-974A-53BA46DA8E34"?> <!-- Regenerate for new upgrade -->
-<?define ProductUpgradeCode = "5a4f6818-b8b2-4fda-b43c-9959a6d734ad"?> <!-- When upgrading, move previous ProductCode here -->
+<?define ProductVersion = "2.1.0"?> <!-- Match ownCloud Client version -->
+<?define PrevProductVersion = "2.0.2"?> <!-- Match previous ownCloud Client version -->
+<?define ExeSourceFile = "ownCloud-2.1.0.5683-setup.exe"?> <!-- Match new .exe -->
+<?define ProductCode = "62EB9B8C-E420-4FA4-A193-491308F875B7"?> <!-- Regenerate for new upgrade -->
+<?define ProductUpgradeCode = "87CA6CC7-4F67-4663-974A-53BA46DA8E34"?> <!-- When upgrading, move previous ProductCode here -->
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
         <Product Id='*'
                 UpgradeCode="$(var.ProductUpgradeCode)"
