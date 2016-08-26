@@ -1,5 +1,5 @@
-del owncloud.msi
-del owncloud.wixobj
-del owncloud.wixpdb
-candle owncloud.wxs
-light owncloud.wixobj
+del nextcloud.msi
+del nextcloud.wixobj
+del nextcloud.wixpdb
+candle nextcloud.wxs
+light nextcloud.wixobj
