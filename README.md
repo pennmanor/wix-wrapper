@@ -17,7 +17,7 @@ Repackager.
 
 ### Package Information
 
-Currently, `owncloud.wxs` simply needs the indicated edits on lines 2-6, making
+Currently, `nextcloud.wxs` simply needs the indicated edits on lines 2-6, making
 the appropriate updates for .exe filename, package version, GUID (optional, see
 below).
 
@@ -35,11 +35,11 @@ first, `candle *.wxs` then `light *.wixobj`, and the MSI will be created.
 
 ### Full MSI Creation Steps:
 
-1. Copy the official or custom built owncloud.exe file into the project folder.
-2. Edit `owncloud.wxs` lines 2-6 as necessary. Generally, only update version and filename.
+1. Copy the official or custom built nextcloud.exe file into the project folder.
+2. Edit `nextcloud.wxs` lines 2-6 as necessary. Generally, only update version and filename.
 3. Run `make_installer.bat`, or run `candle *.wxs`, and `light *.wixobj`.
-4. Copy the newly created owncloud.msi to an appropriate install location (AD server, Network share, etc.)
-5. Install the owncloud.msi with any valid tool- Group Policy, Remote Admin commands, etc.
+4. Copy the newly created nextcloud.msi to an appropriate install location (AD server, Network share, etc.)
+5. Install the nextcloud.msi with any valid tool- Group Policy, Remote Admin commands, etc.
 
 
 ### A note about GUIDs
@@ -52,7 +52,7 @@ When generating an update for the WiX file, a single new GUID is needed on the i
 The GUID referring to the previous install must also be listed so that the installer can properly identify and remove the previous package.
 All GUIDs must be in majuscule (upper) case.
 
-Also of note is a hard-coded GUID in `owncloud.wxs` line 22.
+Also of note is a hard-coded GUID in `nextcloud.wxs` line 22.
 This hard-coded GUID can be used under the assumption that packages are deployed in such a method that the receiving computers have since been restarted and/or cleared the temporary file cache.
 
 
